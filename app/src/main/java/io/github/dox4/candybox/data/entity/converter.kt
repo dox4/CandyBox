@@ -1,4 +1,4 @@
-package io.github.dox4.candybox.entity
+package io.github.dox4.candybox.data.entity
 
 import androidx.room.TypeConverter
 import java.util.*

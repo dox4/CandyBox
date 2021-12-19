@@ -1,10 +1,10 @@
-package io.github.dox4.candybox.dao
+package io.github.dox4.candybox.data.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import io.github.dox4.candybox.entity.Property
+import io.github.dox4.candybox.domain.Property
 import java.util.*
 
 @Dao

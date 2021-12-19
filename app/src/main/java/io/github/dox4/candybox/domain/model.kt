@@ -1,8 +1,9 @@
-package io.github.dox4.candybox.entity
+package io.github.dox4.candybox.domain
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import io.github.dox4.candybox.data.entity.TypeConverter1
 import java.util.*
 
 enum class BookOrWorldType {
@@ -13,13 +14,20 @@ enum class BookOrWorldType {
 @Entity(tableName = "book_or_world")
 @TypeConverters(TypeConverter1::class)
 data class BookOrWorld(
-    @PrimaryKey val id: UUID,
+    @PrimaryKey val id: UUID = UUID.randomUUID(),
     val name: String,
-    val desc: String,
     val type: BookOrWorldType,
-    val createdAt: Date,
+    val createdAt: Date = Date(),
     val updatedAt: Date,
-)
+) {
+    constructor(name: String, type: BookOrWorldType) : this(
+        UUID.randomUUID(),
+        name,
+        type,
+        Date(),
+        Date()
+    )
+}
 
 enum class TemplateType {
     // character

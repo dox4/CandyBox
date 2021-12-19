@@ -3,6 +3,7 @@
     package="io.github.dox4.candybox">
 
     <application
+        android:name=".CandyBoxApp"
         android:allowBackup="true"
         android:fullBackupOnly="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CandyBox">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.CandyBox.NoActionBar">
