@@ -8,20 +8,20 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import io.github.dox4.candybox.domain.BookOrWorld
+import io.github.dox4.candybox.ui.vm.BookOrWorldListViewModel
 
 @Composable
-fun BookTab() {
-    val books = remember {
-        mutableStateListOf<BookOrWorld>()
-    }
+fun BookTab(vm: BookOrWorldListViewModel = hiltViewModel()) {
+//    val books = remember {
+//        mutableStateListOf<BookOrWorld>()
+//    }
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
-        itemsIndexed(books) { _, book ->
+        itemsIndexed(vm.state.value) { _, book ->
             CardItem(item = book)
         }
     }

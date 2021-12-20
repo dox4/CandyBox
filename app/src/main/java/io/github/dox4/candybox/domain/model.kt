@@ -16,13 +16,15 @@ enum class BookOrWorldType {
 data class BookOrWorld(
     @PrimaryKey val id: UUID = UUID.randomUUID(),
     val name: String,
+    val desc: String,
     val type: BookOrWorldType,
     val createdAt: Date = Date(),
     val updatedAt: Date,
 ) {
-    constructor(name: String, type: BookOrWorldType) : this(
+    constructor(name: String, desc: String, type: BookOrWorldType) : this(
         UUID.randomUUID(),
         name,
+        desc,
         type,
         Date(),
         Date()
