@@ -1,4 +1,4 @@
-package io.github.dox4.candybox.ui.vm
+package io.github.dox4.candybox.data.vm
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

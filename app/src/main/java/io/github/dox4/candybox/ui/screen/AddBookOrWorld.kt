@@ -15,10 +15,10 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import io.github.dox4.candybox.data.vm.BookOrWorldViewModel
 import io.github.dox4.candybox.domain.BookOrWorldType
 import io.github.dox4.candybox.ui.component.TopAppBarText
 import io.github.dox4.candybox.ui.nav.Screen
-import io.github.dox4.candybox.ui.vm.BookOrWorldViewModel
 import io.github.dox4.candybox.util.HOME_TAB_TITLES
 
 @Composable

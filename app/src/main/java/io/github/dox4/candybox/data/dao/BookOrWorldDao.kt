@@ -2,15 +2,12 @@ package io.github.dox4.candybox.data.dao
 
 import androidx.room.*
 import io.github.dox4.candybox.domain.BookOrWorld
-import kotlinx.coroutines.flow.Flow
+import io.github.dox4.candybox.domain.BookOrWorldType
 
 @Dao
 interface BookOrWorldDao {
-    @Query("SELECT * FROM book_or_world WHERE type = 'BOOK' ORDER BY createdAt DESC;")
-    fun findBooks(): Flow<List<BookOrWorld>>
-
-    @Query("SELECT * FROM book_or_world WHERE type = 'WORLD' ORDER BY createdAt DESC;")
-    fun findWorlds(): Flow<List<BookOrWorld>>
+    @Query("SELECT * FROM book_or_world WHERE type = :type ORDER BY createdAt DESC;")
+    fun findBookOrWorlds(type: BookOrWorldType): List<BookOrWorld>
 
     @Insert
     suspend fun insertBookOrWorld(bw: BookOrWorld)
