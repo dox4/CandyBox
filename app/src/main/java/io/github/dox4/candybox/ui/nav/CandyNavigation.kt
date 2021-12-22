@@ -1,5 +1,6 @@
 package io.github.dox4.candybox.ui.nav
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.compose.NavHost
@@ -9,6 +10,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import io.github.dox4.candybox.ui.screen.AddBookOrWorld
 import io.github.dox4.candybox.ui.screen.HomeTabs
 
+@ExperimentalMaterialApi
 @ExperimentalPagerApi
 @ExperimentalComposeUiApi
 @Composable
@@ -17,6 +19,10 @@ fun CandyNavigation() {
     NavHost(navController = navController, startDestination = Screen.HomeTabScreen.route) {
         composable(route = Screen.HomeTabScreen.route) {
             HomeTabs(navController = navController)
+        }
+        composable(route = Screen.HomeTabScreen.route + "{tab}") {
+            val tab = it.arguments?.getString("tab") ?: "0"
+            HomeTabs(navController = navController, tab = tab.toInt())
         }
         composable(
             route = Screen.AddBookOrWorld.route + "{index}"

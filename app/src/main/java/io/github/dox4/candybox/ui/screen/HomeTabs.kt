@@ -26,12 +26,13 @@ import io.github.dox4.candybox.util.HOME_TAB_TITLES
 import io.github.dox4.candybox.util.TAB_FONT_SIZE
 import kotlinx.coroutines.launch
 
+@ExperimentalMaterialApi
 @ExperimentalPagerApi
 @ExperimentalComposeUiApi
 @Composable
-fun HomeTabs(navController: NavHostController) {
+fun HomeTabs(navController: NavHostController, tab: Int = 0) {
     val tabTitle = HOME_TAB_TITLES
-    val pagerState = rememberPagerState(initialPage = 0)
+    val pagerState = rememberPagerState(initialPage = tab)
     val tabIndex = pagerState.currentPage
     Scaffold(
         topBar = {
@@ -88,8 +89,8 @@ fun HomeTabs(navController: NavHostController) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     when (index) {
-                        0 -> BookTab()
-                        1 -> WorldTab()
+                        0 -> BookTab(navController)
+                        1 -> WorldTab(navController)
                         2 -> OtherTab()
                         else -> throw IndexOutOfBoundsException()
                     }

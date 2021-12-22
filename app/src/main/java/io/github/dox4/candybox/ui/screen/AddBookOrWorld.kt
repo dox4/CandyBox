@@ -30,7 +30,7 @@ fun AddBookOrWorld(
     vm.type = if (index == 0) BookOrWorldType.BOOK else BookOrWorldType.WORLD
     val goBack = fun() {
         navController.popBackStack()
-        navController.navigate(Screen.HomeTabScreen.route)
+        navController.navigate(Screen.HomeTabScreen.route + index)
     }
     Scaffold(
         topBar = {

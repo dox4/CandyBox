@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class BookOrWorldListViewModel @Inject constructor(private val repo: BookOrWorldRepository) :
+class BookListViewModel @Inject constructor(private val repo: BookOrWorldRepository) :
     ViewModel() {
     private val _state =
         MutableStateFlow<ResultState<List<BookOrWorld>>>(
@@ -28,17 +28,56 @@ class BookOrWorldListViewModel @Inject constructor(private val repo: BookOrWorld
     val state: StateFlow<ResultState<List<BookOrWorld>>> = _state
 
     private val _update = MutableLiveData(false)
-    private val _bookOrWorlds = _update.switchMap {
+    private val _books = _update.switchMap {
         repo.findBookOrWorlds(BookOrWorldType.BOOK).asLiveData(viewModelScope.coroutineContext)
     }.switchMap {
         MutableLiveData(it.data)
     }
-    val bookOrWorlds = _bookOrWorlds
+    val books = _books
 
-    fun findBookOrWorld(type: BookOrWorldType) {
+    fun findBooks() {
         _state.value = ResultState.loading()
         viewModelScope.launch {
-            repo.findBookOrWorlds(type)
+            repo.findBookOrWorlds(BookOrWorldType.BOOK)
+                .catch {
+                    Log.d(javaClass.canonicalName, "catch exception: ${it.message}")
+                    _state.value = ResultState.error(it.message.toString())
+                }.collect {
+                    Log.d(javaClass.canonicalName, "read data: ${it.data?.size}")
+                    _state.value = ResultState.success(it.data!!)
+                }
+        }
+    }
+
+//    fun add(bw: BookOrWorld) = viewModelScope.launch { repo.insertBookOrWorld(bw) }
+//    fun update(bw: BookOrWorld) = viewModelScope.launch { repo.updateBookOrWorld(bw) }
+//    fun delete(bw: BookOrWorld) = viewModelScope.launch { repo.deleteBookOrWorld(bw) }
+}
+
+@HiltViewModel
+class WorldListViewModel @Inject constructor(private val repo: BookOrWorldRepository) :
+    ViewModel() {
+    private val _state =
+        MutableStateFlow<ResultState<List<BookOrWorld>>>(
+            ResultState(
+                ResultStatus.LOADING,
+                emptyList()
+            )
+        )
+    val state: StateFlow<ResultState<List<BookOrWorld>>> = _state
+
+    private val _update = MutableLiveData(false)
+    private val _worlds = _update.switchMap {
+        repo.findBookOrWorlds(BookOrWorldType.WORLD).asLiveData(viewModelScope.coroutineContext)
+    }.switchMap {
+        MutableLiveData(it.data)
+    }
+    val worlds = _worlds
+
+    fun findWorlds() {
+        _state.value = ResultState.loading()
+        viewModelScope.launch {
+            repo.findBookOrWorlds(BookOrWorldType.WORLD)
                 .catch {
                     Log.d(javaClass.canonicalName, "catch exception: ${it.message}")
                     _state.value = ResultState.error(it.message.toString())

@@ -9,3 +9,7 @@ val Shapes = Shapes(
     medium = RoundedCornerShape(4.dp),
     large = RoundedCornerShape(0.dp)
 )
+val CardShape = RoundedCornerShape(10.dp)
+
+val CardPadding = 5.dp
+val CardElevation = 10.dp
