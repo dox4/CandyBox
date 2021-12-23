@@ -17,10 +17,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavOptionsBuilder
+import androidx.navigation.navArgument
 import io.github.dox4.candybox.data.vm.BookListViewModel
 import io.github.dox4.candybox.data.vm.WorldListViewModel
 import io.github.dox4.candybox.domain.BookOrWorld
 import io.github.dox4.candybox.domain.BookOrWorldType
+import io.github.dox4.candybox.ui.nav.Screen
 import io.github.dox4.candybox.ui.theme.*
 
 @ExperimentalMaterialApi
@@ -68,7 +71,10 @@ fun CardItem(item: BookOrWorld, navController: NavController) {
             .padding(CardPadding),
         elevation = CardElevation,
         shape = CardShape,
-        onClick = {}
+        onClick = {
+            navController.navigate(Screen.TemplateTypeTab.route + item.id) {
+            }
+        }
     ) {
         Column(
             modifier = Modifier

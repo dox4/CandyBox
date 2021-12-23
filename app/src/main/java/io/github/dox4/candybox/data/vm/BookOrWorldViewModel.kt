@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class BookOrWorldViewModel @Inject constructor(val dao: BookOrWorldDao) : ViewModel() {
+class BookOrWorldViewModel @Inject constructor(private val dao: BookOrWorldDao) : ViewModel() {
     private var _name = mutableStateOf("")
     val name: State<String> = _name
     private var _desc = mutableStateOf("")
@@ -28,6 +28,9 @@ class BookOrWorldViewModel @Inject constructor(val dao: BookOrWorldDao) : ViewMo
 
     var type = BookOrWorldType.BOOK
 
+    private var _state = mutableStateOf(BookOrWorld())
+    val state = _state
+
     fun save() {
         viewModelScope.launch {
             dao.insertBookOrWorld(
@@ -37,6 +40,12 @@ class BookOrWorldViewModel @Inject constructor(val dao: BookOrWorldDao) : ViewMo
                     type = type,
                 )
             )
+        }
+    }
+
+    fun findBookOrWorld(id: String) {
+        viewModelScope.launch {
+            _state.value = dao.findBookOrWorld(id)
         }
     }
 }

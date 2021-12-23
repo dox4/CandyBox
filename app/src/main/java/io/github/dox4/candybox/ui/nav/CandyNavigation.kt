@@ -7,8 +7,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
+import io.github.dox4.candybox.data.repo.BookOrWorldRepository
 import io.github.dox4.candybox.ui.screen.AddBookOrWorld
 import io.github.dox4.candybox.ui.screen.HomeTabs
+import io.github.dox4.candybox.ui.screen.TemplateTypeTab
 
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
@@ -20,15 +22,14 @@ fun CandyNavigation() {
         composable(route = Screen.HomeTabScreen.route) {
             HomeTabs(navController = navController)
         }
-        composable(route = Screen.HomeTabScreen.route + "{tab}") {
-            val tab = it.arguments?.getString("tab") ?: "0"
-            HomeTabs(navController = navController, tab = tab.toInt())
-        }
         composable(
             route = Screen.AddBookOrWorld.route + "{index}"
         ) {
             val index = it.arguments?.getString("index") ?: throw NoIndexException
             AddBookOrWorld(navController = navController, index = index.toInt())
+        }
+        composable(route = Screen.TemplateTypeTab.route + "{bowId}") {
+            TemplateTypeTab(navController = navController, it.arguments!!.getString("bowId")!!)
         }
     }
 }

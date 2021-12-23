@@ -28,10 +28,6 @@ fun AddBookOrWorld(
     vm: BookOrWorldViewModel = hiltViewModel()
 ) {
     vm.type = if (index == 0) BookOrWorldType.BOOK else BookOrWorldType.WORLD
-    val goBack = fun() {
-        navController.popBackStack()
-        navController.navigate(Screen.HomeTabScreen.route + index)
-    }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -42,7 +38,7 @@ fun AddBookOrWorld(
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        goBack()
+                        navController.popBackStack()
                     }) {
                         Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "后退")
                     }
@@ -52,7 +48,7 @@ fun AddBookOrWorld(
         floatingActionButton = {
             FloatingActionButton(onClick = {
                 vm.save()
-                goBack()
+                navController.popBackStack()
             }) {
                 Icon(imageVector = Icons.Filled.Save, contentDescription = "保存")
             }

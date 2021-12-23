@@ -21,6 +21,7 @@ data class BookOrWorld(
     val createdAt: Date = Date(),
     val updatedAt: Date,
 ) {
+    constructor() : this("", "", BookOrWorldType.BOOK)
     constructor(name: String, desc: String, type: BookOrWorldType) : this(
         UUID.randomUUID(),
         name,
@@ -31,21 +32,29 @@ data class BookOrWorld(
     )
 }
 
-enum class TemplateType {
-    // character
-    CHARACTER,
-    RELATION,
-    GROUP,
+val GroupedTypes = arrayOf(
+    arrayOf(TemplateType.CHARACTER, TemplateType.RELATION, TemplateType.GROUP),
+    arrayOf(TemplateType.PLACE, TemplateType.RACE, TemplateType.CREATURE, TemplateType.PLANT),
+    arrayOf(TemplateType.ITEM, TemplateType.GOD_OR_DEMON, TemplateType.MAGIC, TemplateType.CALENDAR)
+)
 
-    // world
-    PLACE,
-    RACE,
-    ITEM,
-    CREATURE,
-    PLANT,
-    GOD_OR_DEMON,
-    MAGIC,
-    CALENDAR
+enum class TemplateType(val hans: String) {
+    // character
+    CHARACTER("人物"),
+    RELATION("关联"),
+    GROUP("组织"),
+
+    // nature
+    PLACE("地点"),
+    RACE("种族/族群"),
+    CREATURE("动物"),
+    PLANT("植物"),
+
+    // craft
+    ITEM("物品"),
+    GOD_OR_DEMON("神魔"),
+    MAGIC("魔法"),
+    CALENDAR("历法")
 }
 
 @Entity(tableName = "template")

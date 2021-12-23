@@ -9,6 +9,9 @@ interface BookOrWorldDao {
     @Query("SELECT * FROM book_or_world WHERE type = :type ORDER BY createdAt DESC;")
     fun findBookOrWorlds(type: BookOrWorldType): List<BookOrWorld>
 
+    @Query("SELECT * FROM book_or_world WHERE id = :id")
+    suspend fun findBookOrWorld(id: String): BookOrWorld
+
     @Insert
     suspend fun insertBookOrWorld(bw: BookOrWorld)
 

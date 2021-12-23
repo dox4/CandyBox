@@ -2,6 +2,7 @@ package io.github.dox4.candybox.data.repo
 
 import io.github.dox4.candybox.data.dao.BookOrWorldDao
 import io.github.dox4.candybox.data.state.ResultState
+import io.github.dox4.candybox.domain.BookOrWorld
 import io.github.dox4.candybox.domain.BookOrWorldType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
@@ -14,4 +15,12 @@ class BookOrWorldRepository @Inject constructor(val dao: BookOrWorldDao) {
         emit(ResultState.success(bws))
     }.flowOn(Dispatchers.IO)
 
+    fun findBookOrWorld(id: String) = flow {
+        val bow = dao.findBookOrWorld(id)
+        emit(ResultState.success(bow))
+    }.flowOn(Dispatchers.IO)
+
+    suspend fun insertBookOrWorld(bookOrWorld: BookOrWorld) {
+        dao.insertBookOrWorld(bookOrWorld)
+    }
 }

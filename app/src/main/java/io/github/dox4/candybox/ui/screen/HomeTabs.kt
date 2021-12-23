@@ -30,9 +30,9 @@ import kotlinx.coroutines.launch
 @ExperimentalPagerApi
 @ExperimentalComposeUiApi
 @Composable
-fun HomeTabs(navController: NavHostController, tab: Int = 0) {
+fun HomeTabs(navController: NavHostController) {
     val tabTitle = HOME_TAB_TITLES
-    val pagerState = rememberPagerState(initialPage = tab)
+    val pagerState = rememberPagerState(initialPage = 0)
     val tabIndex = pagerState.currentPage
     Scaffold(
         topBar = {
