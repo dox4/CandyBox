@@ -17,8 +17,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavOptionsBuilder
-import androidx.navigation.navArgument
 import io.github.dox4.candybox.data.vm.BookListViewModel
 import io.github.dox4.candybox.data.vm.WorldListViewModel
 import io.github.dox4.candybox.domain.BookOrWorld
@@ -57,10 +55,50 @@ fun WorldTab(navController: NavController, vm: WorldListViewModel = hiltViewMode
     }
 }
 
+
+class Item(val name: String, val route: String)
+
+@ExperimentalMaterialApi
 @Composable
-fun OtherTab() {
+fun OtherTab(navController: NavController) {
+
+    val items = arrayOf(Item("模板", Screen.TemplateList.route))
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
+        itemsIndexed(items) { _, item ->
+            OtherCardItem(navController, item)
+        }
+    }
 }
 
+@Composable
+@OptIn(ExperimentalMaterialApi::class)
+fun OtherCardItem(navController: NavController, item: Item) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(CardPadding),
+        elevation = CardElevation,
+        onClick = {
+            navController.navigate(item.route)
+        }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = SimpleCardColor2)
+                .padding(16.dp),
+            content = {
+                Text(
+                    text = item.name,
+                    style = MaterialTheme.typography.h6,
+                    color = MaterialTheme.colors.onSurface,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+        )
+    }
+}
 
 @ExperimentalMaterialApi
 @Composable

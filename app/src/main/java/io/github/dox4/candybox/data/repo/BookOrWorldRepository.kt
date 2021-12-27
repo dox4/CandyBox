@@ -14,13 +14,4 @@ class BookOrWorldRepository @Inject constructor(val dao: BookOrWorldDao) {
         val bws = dao.findBookOrWorlds(type = type)
         emit(ResultState.success(bws))
     }.flowOn(Dispatchers.IO)
-
-    fun findBookOrWorld(id: String) = flow {
-        val bow = dao.findBookOrWorld(id)
-        emit(ResultState.success(bow))
-    }.flowOn(Dispatchers.IO)
-
-    suspend fun insertBookOrWorld(bookOrWorld: BookOrWorld) {
-        dao.insertBookOrWorld(bookOrWorld)
-    }
 }

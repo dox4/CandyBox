@@ -7,9 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
-import io.github.dox4.candybox.data.repo.BookOrWorldRepository
 import io.github.dox4.candybox.ui.screen.AddBookOrWorld
 import io.github.dox4.candybox.ui.screen.HomeTabs
+import io.github.dox4.candybox.ui.screen.TemplateList
 import io.github.dox4.candybox.ui.screen.TemplateTypeTab
 
 @ExperimentalMaterialApi
@@ -30,6 +30,9 @@ fun CandyNavigation() {
         }
         composable(route = Screen.TemplateTypeTab.route + "{bowId}") {
             TemplateTypeTab(navController = navController, it.arguments!!.getString("bowId")!!)
+        }
+        composable(route = Screen.TemplateList.route) {
+            TemplateList(navController = navController)
         }
     }
 }

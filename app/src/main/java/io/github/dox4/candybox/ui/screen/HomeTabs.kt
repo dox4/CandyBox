@@ -12,7 +12,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 @ExperimentalPagerApi
 @ExperimentalComposeUiApi
 @Composable
-fun HomeTabs(navController: NavHostController) {
+fun HomeTabs(navController: NavController) {
     val tabTitle = HOME_TAB_TITLES
     val pagerState = rememberPagerState(initialPage = 0)
     val tabIndex = pagerState.currentPage
@@ -91,7 +91,7 @@ fun HomeTabs(navController: NavHostController) {
                     when (index) {
                         0 -> BookTab(navController)
                         1 -> WorldTab(navController)
-                        2 -> OtherTab()
+                        2 -> OtherTab(navController)
                         else -> throw IndexOutOfBoundsException()
                     }
                 }
